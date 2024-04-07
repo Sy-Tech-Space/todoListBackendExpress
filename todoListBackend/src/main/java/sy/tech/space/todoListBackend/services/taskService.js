@@ -3,9 +3,7 @@ const Task = require('../models/Task');
 
 const getAllTasks = async () => {
     try {
-        const pool = await poolPromise;
-        const result = await pool.request().query('SELECT * FROM Tasks');
-        return result.recordset;
+        return await Task.getAllTasks();
     } catch (error) {
         console.error('Error fetching tasks:', error);
         throw error;

@@ -17,6 +17,17 @@ const createTable = async () => {
     }
 };
 
+const getAllTasks = async () => {
+    try {
+        const pool = await sql.connect();
+        const result = await pool.request().query('SELECT * FROM Tasks');
+        return result.recordset;
+    } catch (error) {
+        console.error('Error fetching tasks:', error);
+        throw error;
+    }
+};
+
 const createTask = async (title) => {
     try {
         const pool = await sql.connect();
@@ -28,10 +39,12 @@ const createTask = async (title) => {
         console.log('Task created');
     } catch (error) {
         console.error('Error creating task:', error);
+        throw error;
     }
 };
 
 module.exports = {
     createTable,
+    getAllTasks,
     createTask
 };
