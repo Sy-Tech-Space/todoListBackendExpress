@@ -2,12 +2,14 @@
 const sql = require('mssql');
 
 const config = {
-   // user: 'your_username',
-   // password: 'your_password',
-    server: 'localhost',
-    database: 'todoList',
+    server: 'localhost',  // Change this to your server address
+    port: 1433,           // Change this to your port number if necessary
+    database: 'todoList', // Change this to your database name
     options: {
-        encrypt: false   // Set to true if using Azure SQL
+        encrypt: false,   // Set to true if using Azure SQL
+        trustServerCertificate: true, // For self-signed certificates, if applicable
+        // Set integratedSecurity to true for Windows authentication
+        integratedSecurity: true  
     }
 };
 
@@ -19,7 +21,11 @@ const poolPromise = new sql.ConnectionPool(config)
     })
     .catch(err => console.error('MSSQL Server connection error:', err));
 
+
+
 module.exports = {
     sql,
     poolPromise
 };
+
+
