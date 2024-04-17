@@ -1,16 +1,17 @@
 // models/Task.js
-const { sql } = require('../config/dbConfig');
+const { Pool } = require('../config/dbConfig');
 
 const createTable = async () => {
     try {
-        const pool = await sql.connect();
+        const pool = await Pool.connect();
         const query = `
             CREATE TABLE Tasks (
                 id INT IDENTITY(1,1) PRIMARY KEY,
                 title NVARCHAR(255) NOT NULL
             )
         `;
-        await pool.request().query(query);
+        //pool.request().query(query);
+        await pool.query(query);
         console.log('Tasks table created');
     } catch (error) {
         console.error('Error creating Tasks table:', error);
@@ -19,9 +20,10 @@ const createTable = async () => {
 
 const getAllTasks = async () => {
     try {
-        const pool = await sql.connect();
-        const result = await pool.request().query('SELECT * FROM Tasks');
-        return result.recordset;
+        const pool = await Pool.connect();
+        const result = await pool.query('SELECT * FROM "Tasks"');
+        //return result.recordset;
+        return result.rows;
     } catch (error) {
         console.error('Error fetching tasks:', error);
         throw error;
@@ -30,12 +32,12 @@ const getAllTasks = async () => {
 
 const createTask = async (title) => {
     try {
-        const pool = await sql.connect();
+        const pool = await Pool.connect();
         const query = `
             INSERT INTO Tasks (title)
             VALUES ('${title}')
         `;
-        await pool.request().query(query);
+        await pool.query(query);
         console.log('Task created');
     } catch (error) {
         console.error('Error creating task:', error);
@@ -43,8 +45,37 @@ const createTask = async (title) => {
     }
 };
 
+//function for deleting a task by ID
+const deleteTask = async (taskId) => {
+    try {
+        const pool = await Pool.connect();
+        const query = 'DELETE FROM Tasks WHERE id = $1';
+        await pool.query(query, [taskId]);
+        console.log('Task deleted');
+    } catch (error) {
+        console.error('Error deleting task:', error);
+        throw error;
+    }
+};
+
+
+//function for updating a task by ID
+const updateTask = async (taskId, title) => {
+    try {
+        const pool = await Pool.connect();
+        const query = 'UPDATE Tasks SET title = $1 WHERE id = $2';
+        await pool.query(query, [title, taskId]);
+        console.log('Task updated');
+    } catch (error) {
+        console.error('Error updating task:', error);
+        throw error;
+    }
+};
+
 module.exports = {
     createTable,
     getAllTasks,
-    createTask
+    createTask,
+    deleteTask,
+    updateTask
 };

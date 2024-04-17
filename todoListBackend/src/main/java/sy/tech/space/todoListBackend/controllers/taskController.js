@@ -22,7 +22,34 @@ const createTask = async (req, res) => {
     }
 };
 
+// function for deleting a task by ID
+const deleteTask = async (req, res) => {
+    try {
+        const taskId = req.params.id;
+        await TaskService.deleteTask(taskId);
+        res.status(204).send(); // No content (successful deletion)
+    } catch (error) {
+        console.error('Error deleting task:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+//function for updating a task by ID
+const updateTask = async (req, res) => {
+    try {
+        const taskId = req.params.id;
+        const { title } = req.body;
+        await TaskService.updateTask(taskId, title);
+        res.status(200).json({ message: 'Task updated successfully' });
+    } catch (error) {
+        console.error('Error updating task:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
 module.exports = {
     getAllTasks,
-    createTask
+    createTask,
+    deleteTask,
+    updateTask
 };

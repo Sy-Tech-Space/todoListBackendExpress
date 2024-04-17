@@ -38,7 +38,7 @@ const pool = new Pool({
     password: 'postgres',
     host: 'localhost',
     port: 5433, // default Postgres port
-    database: 'address'
+    database: 'todoList'
 });
 
 module.exports = {
