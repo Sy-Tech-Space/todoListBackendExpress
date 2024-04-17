@@ -26,7 +26,7 @@ const createTask = async (req, res) => {
 const deleteTask = async (req, res) => {
     try {
         const taskId = req.params.id;
-        await TaskService.deleteTask(taskId);
+        await TaskService.deleteTask(id);
         res.status(204).send(); // No content (successful deletion)
     } catch (error) {
         console.error('Error deleting task:', error);
@@ -39,7 +39,7 @@ const updateTask = async (req, res) => {
     try {
         const taskId = req.params.id;
         const { title } = req.body;
-        await TaskService.updateTask(taskId, title);
+        await TaskService.updateTask(id, title);
         res.status(200).json({ message: 'Task updated successfully' });
     } catch (error) {
         console.error('Error updating task:', error);

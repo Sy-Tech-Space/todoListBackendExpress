@@ -20,9 +20,9 @@ const createTask = async (title) => {
 };
 
 // function for deleting a task by ID
-const deleteTask = async (taskId) => {
+const deleteTask = async (id) => {
     try {
-        await Task.deleteTask(taskId);
+        await Task.deleteTask(id);
     } catch (error) {
         console.error('Error deleting task:', error);
         throw error;
@@ -30,9 +30,9 @@ const deleteTask = async (taskId) => {
 };
 
 //function for updating a task by ID
-const updateTask = async (taskId, title) => {
+const updateTask = async (id, title) => {
     try {
-        await Task.updateTask(taskId, title);
+        await Task.updateTask(id, title);
     } catch (error) {
         console.error('Error updating task:', error);
         throw error;

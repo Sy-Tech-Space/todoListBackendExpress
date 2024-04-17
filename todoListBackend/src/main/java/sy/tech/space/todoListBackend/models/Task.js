@@ -46,11 +46,11 @@ const createTask = async (title) => {
 };
 
 //function for deleting a task by ID
-const deleteTask = async (taskId) => {
+const deleteTask = async (id) => {
     try {
         const pool = await Pool.connect();
         const query = 'DELETE FROM Tasks WHERE id = $1';
-        await pool.query(query, [taskId]);
+        await pool.query(query, [id]);
         console.log('Task deleted');
     } catch (error) {
         console.error('Error deleting task:', error);
@@ -60,11 +60,11 @@ const deleteTask = async (taskId) => {
 
 
 //function for updating a task by ID
-const updateTask = async (taskId, title) => {
+const updateTask = async (id, title) => {
     try {
         const pool = await Pool.connect();
         const query = 'UPDATE Tasks SET title = $1 WHERE id = $2';
-        await pool.query(query, [title, taskId]);
+        await pool.query(query, [title, id]);
         console.log('Task updated');
     } catch (error) {
         console.error('Error updating task:', error);
