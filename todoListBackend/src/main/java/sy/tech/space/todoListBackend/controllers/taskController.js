@@ -1,4 +1,7 @@
 // controllers/taskController.js
+//Controllers handle incoming HTTP requests, process them, and send back responses.
+//It also handles any errors that occur during the request processing.
+
 const TaskService = require('../services/taskService');
 
 const getAllTasks = async (req, res) => {

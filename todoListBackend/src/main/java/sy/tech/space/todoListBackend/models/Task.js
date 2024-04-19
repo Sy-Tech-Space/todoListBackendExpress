@@ -1,4 +1,9 @@
 // models/Task.js
+//this class contains the module for tasks, responsible for interacting with the database to perform CRUD operations related to tasks 
+
+
+
+
 const { Pool } = require('../config/dbConfig');
 
 const createTable = async () => {
@@ -73,7 +78,7 @@ const updateTask = async (id, title) => {
 };
 
 module.exports = {
-    createTable,
+    //createTable,
     getAllTasks,
     createTask,
     deleteTask,

@@ -1,4 +1,8 @@
 // services/taskService.js
+//The service layer abstracts the business logic and interacts with the model to perform CRUD operations.
+
+
+
 const Task = require('../models/Task');
 
 const getAllTasks = async () => {
