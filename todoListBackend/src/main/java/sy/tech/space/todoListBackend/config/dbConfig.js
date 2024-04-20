@@ -43,10 +43,14 @@ const pool = new Pool({
     database: 'todoList'
 });
 
-//query function, allows executing SQL queries against the database using pool connection
+
 module.exports = {
-    query: (text, params) => pool.query(text, params)
+    Pool: pool
 };
+//query function, allows executing SQL queries against the database using pool connection
+/*module.exports = {
+    query: (text, params) => pool.query(text, params)
+};*/
 
 
 

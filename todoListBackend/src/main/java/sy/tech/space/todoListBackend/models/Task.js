@@ -39,7 +39,7 @@ const createTask = async (title) => {
     try {
         const pool = await Pool.connect();
         const query = `
-            INSERT INTO Tasks (title)
+            INSERT INTO "Tasks" (title)
             VALUES ('${title}')
         `;
         await pool.query(query);
@@ -54,7 +54,7 @@ const createTask = async (title) => {
 const deleteTask = async (id) => {
     try {
         const pool = await Pool.connect();
-        const query = 'DELETE FROM Tasks WHERE id = $1';
+        const query = 'DELETE FROM "Tasks" WHERE id = $1';
         await pool.query(query, [id]);
         console.log('Task deleted');
     } catch (error) {
@@ -68,7 +68,7 @@ const deleteTask = async (id) => {
 const updateTask = async (id, title) => {
     try {
         const pool = await Pool.connect();
-        const query = 'UPDATE Tasks SET title = $1 WHERE id = $2';
+        const query = 'UPDATE "Tasks" SET title = $1 WHERE id = $2';
         await pool.query(query, [title, id]);
         console.log('Task updated');
     } catch (error) {
