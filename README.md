@@ -6,7 +6,7 @@ The database configuration is separated for better organization and reusability.
 
 
 
-Script used for creating database locally in Postgres: 
+# Script used for creating database locally in Postgres: 
 
 -- Column: public."Tasks".id
 
@@ -23,4 +23,10 @@ INSERT INTO "Tasks" (title)
 VALUES ('Cook');
 
 SELECT * FROM "Tasks";
+
+
+
+# For running the project
+1. navigate to this path: cd todoListBackend/src/main/java/sy/tech/space/todoListBackend
+2. node app.js 
 
